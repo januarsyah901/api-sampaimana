@@ -7,6 +7,17 @@ const contributionSchema = z.object({
   proofLinks: z.array(z.string().url('Format tautan tidak valid')).optional().default([]),
 });
 
+const parseJsonSafely = (val) => {
+  if (typeof val === 'string') {
+    try {
+      return JSON.parse(val);
+    } catch (e) {
+      return [];
+    }
+  }
+  return val || [];
+};
+
 const verifySchema = z.object({
   status: z.enum(['APPROVED', 'REJECTED']),
   rejectionReason: z.string().optional(),
@@ -88,8 +99,8 @@ const getMyContributions = async (req, res) => {
     // Parse JSON strings back
     const formatted = contributions.map(c => ({
       ...c,
-      proofLinks: JSON.parse(c.proofLinks),
-      proofFiles: JSON.parse(c.proofFiles),
+      proofLinks: parseJsonSafely(c.proofLinks),
+      proofFiles: parseJsonSafely(c.proofFiles),
     }));
 
     return res.json({
@@ -125,8 +136,8 @@ const getPendingContributions = async (req, res) => {
 
     const formatted = contributions.map(c => ({
       ...c,
-      proofLinks: JSON.parse(c.proofLinks),
-      proofFiles: JSON.parse(c.proofFiles),
+      proofLinks: parseJsonSafely(c.proofLinks),
+      proofFiles: parseJsonSafely(c.proofFiles),
     }));
 
     return res.json({
