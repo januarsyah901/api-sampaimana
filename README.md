@@ -1,6 +1,6 @@
 # 🏛️ API Platform Transparansi Hukum (NIC) - Backend
 
-> Trigger CI/CD test
+> Trigger CI/CD test - test push from local
 
 Backend API lengkap dibangun menggunakan Node.js, Express.js, Prisma ORM, PostgreSQL, dan Swagger UI untuk dokumentasi API.
 
