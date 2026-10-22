@@ -1,1 +1,1 @@
-npm test
+node --check src/index.js
